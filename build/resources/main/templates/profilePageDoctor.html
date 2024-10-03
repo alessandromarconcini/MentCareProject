@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Patient List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 80%;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+</head>
+<body>
+<div style="text-align:right;">
+    <a href="/logout">Logout</a>
+</div>
+<h1>Home Doctor</h1>
+<h2>Patient List</h2>
+
+<table>
+    <tr>
+        <form action="/searchPatient">
+            <label for="search-bar3">Cerca Appuntamento Paziente tramite cognome:</label>
+            <input type="text" id="search-bar3" name="research" placeholder=" Inserire cognome ">
+            <input type="hidden" name="resid" id="resid" th:value="${id}" required>
+            <button id="search-button3">Cerca</button>
+        </form>
+        <br>
+        <br>
+            <th>
+                <form action="/getDoctorPrescriptionBySelectedRow">
+                    <input type="hidden" id="selectedRow" name="selectedRow">
+                    <input type="hidden" name="id" id="id" th:value="${id}" required>
+                    <button type="submit">Visualizza Prescrizione</button>
+                    <br>
+                    <comment>Clicca sulla riga del paziente e poi sul bottone</comment>
+                </form>
+            </th>
+            <th>
+                <form action="/createPrescription">
+                    <input type="hidden" id="doctorId" name="doctorId" th:value="${id}" >
+                    <button type="submit" name="newPrescription" id="newPrescription">Nuova Prescrizione</button>
+                </form>
+            </th>
+    </tr>
+</table>
+
+<br>
+<br>
+<hr>
+<table id="AppointmentTable2">
+    <thead>
+    <tr>
+        <th>Codice Appuntamento</th>
+        <th>Codice Paziente</th>
+        <th>Nome Paziente</th>
+        <th>Cognome Paziente</th>
+        <th>Codice Fiscale</th>
+        <th>Infermiere</th>
+        <th>Data</th>
+        <th>Orario</th>
+    </tr>
+    </thead>
+            <tbody>
+            <tr th:each= "appointment: ${appointmentList}" onclick="selectRow(this)" >
+                <td th:text="${appointment.patient.id}"> <b>1 </b></td>
+                <td th:text="${appointment.id}"> <b>1 </b></td>
+                <td th:text="${appointment.patient.name}"> <b>Francesco </b></td>
+                <td th:text="${appointment.patient.surname}"> <b>Merino </b></td>
+                <td th:text="${appointment.patient.fiscalCode}"> <b>hgdfghssgdfsghf </b></td>
+                <td th:text="${appointment.nurse.surname}"> <b>Inf. Rossi </b></td>
+                <td th:text="${appointment.date}"> <b>15/01/2023 </b></td>
+                <td th:text="${appointment.hour}"> <b>8.30 </b></td>
+            </tr>
+            </tbody>
+</table>
+<br>
+<button onclick="window.history.back()">Indietro</button>
+</body>
+</html>
+
+<script>
+    var selectedRow = null;
+
+    function selectRow(row) {
+        if(selectedRow != null)
+            selectedRow.style.backgroundColor = "white";
+        row.style.backgroundColor = "lightblue";
+        selectedRow = row;
+        document.getElementById("selectedRow").setAttribute("value",selectedRow.cells[0].innerText);
+    }
+</script>

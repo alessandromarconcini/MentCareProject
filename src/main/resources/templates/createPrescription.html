@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Nuova Prescrizione Medica</title>
+  <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        margin-top: 50px;
+      }
+      form {
+        margin: 0 auto;
+        width: 50%;
+        text-align: left;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px #ccc;
+      }
+      label {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+      textarea {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        resize: none;
+      }
+      select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100%;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+</head>
+<body>
+<h1>Nuova Prescrizione Medica</h1>
+<form action="/createPrescriptionFromPage">
+  <label for="patientId">Codice paziente:</label>
+  <input type="text" id="patientId" name="patientId"><br><br>
+  <input type="hidden" id="doctorId" name="doctorId" th:value="${id}"><br><br>
+  <label for="drug1">Farmaco1:</label>
+  <select id="drug1" name="drug1">
+    <th:block th:each="drug: ${drugDepositList}">
+      <option th:text="${drug.name}" th:value="${drug.name}"></option>
+    </th:block>
+  </select><br><br>
+  <label for="dose1">Dosaggio:</label>
+  <input type="number" step="0.01" id="dose1" name="dose1"><br><br>
+  <label for="frequency1">Frequenza:</label>
+  <input type="text" id="frequency1" name="frequency1"><br><br>
+  <label for="drug2">Farmaco2:</label>
+  <select id="drug2" name="drug2">
+    <option value="Nessuno">Nessuno</option>
+    <th:block th:each="drug: ${drugDepositList}">
+      <option th:text="${drug.name}" th:value="${drug.name}"></option>
+    </th:block>
+  </select><br><br>
+  <label for="dose2">Dosaggio:</label>
+  <input type="number" step="0.01" id="dose2" name="dose2"><br><br>
+  <label for="frequency2">Frequenza:</label>
+  <input type="text" id="frequency2" name="frequency2"><br><br>
+  <label for="drug3">Farmaco3:</label>
+  <select id="drug3" name="drug3">
+    <option value="Nessuno">Nessuno</option>
+    <th:block th:each="drug: ${drugDepositList}">
+      <option th:text="${drug.name}" th:value="${drug.name}"></option>
+    </th:block>
+  </select><br><br>
+  <label for="dose3">Dosaggio:</label>
+  <input type="number" step="0.01" id="dose3" name="dose3"><br><br>
+  <label for="frequency3">Frequenza:</label>
+  <input type="text" id="frequency3" name="frequency3"><br><br>
+  <label for="textReport">Report Medico:</label>
+  <textarea id="textReport" name="textReport"></textarea><br><br>
+  <input type="submit" id="savePrescription" value="Salva Prescrizione">
+  <input type="submit" value="Indietro" onclick="window.history.back(); return false;" />
+</form>
+</body>
+</html>

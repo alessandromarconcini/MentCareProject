@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Modifica Appuntamento</title>
+  <style>
+    /* Stile per la form */
+    h1 {
+      text-align: center;
+      margin-top: 50px;
+    }
+    form {
+      width: 80%;
+      margin: 0 auto;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f2f2f2;
+    }
+    /* Stile per gli input */
+    input[type="text"], input[type="date"], select {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    /* Stile per i tasti */
+    input[type="submit"] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    /* Stile per il tasto indietro */
+    .back-button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      width: 100%;
+    }
+    .back-button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<h1>Modifica Appuntamento</h1>
+<form action="/updateAppointmentFromPage">
+
+  <label for="patientId">Codice paziente:</label>
+  <input type="text" id="patientId" name="patientId" th:value="${appointment.getPatient().getId()}">
+
+  <label for="patientName">Nome Paziente:</label>
+  <input type="text" id="patientName" name="patientName" th:value="${appointment.getPatient().getName()}">>
+
+  <label for="patientSurname">Cognome Paziente:</label>
+  <input type="text" id="patientSurname" name="patientSurname" th:value="${appointment.getPatient().getSurname()}">
+
+  <label for="doctor">Medico:</label>
+  <select id="doctor" name="doctorSurname" >
+    <th:block th:each="doctor: ${doctorList}">
+      <option th:text="${doctor.surname}" th:value="${doctor.surname}"
+        th:if="${doctor.surname == appointment.doctor.surname}"
+        selected="selected">
+      </option>
+    </th:block>
+  </select>
+
+  <label for="nurse">Infermiere:</label>
+  <select id="nurse" name="nurseSurname">
+    <th:block th:each="nurse: ${nurseList}">
+      <option th:text="${nurse.surname}" th:value="${nurse.surname}"
+        th:if="${nurse.surname == appointment.nurse.surname}"
+        selected="selected">
+      </option>
+    </th:block>
+  </select>
+
+  <label for="date">Data:</label>
+  <input type="date" id="date" name="date" th:value="${appointment.date}">
+
+  <label for="hour">Ora:</label>
+  <input type="text" id="hour" name="hour" th:value="${appointment.hour}">
+
+  <input type="hidden" id="receptionistId" name="receptionistId" th:value="${id}" required>
+  <input type="hidden" id="prevAppointment" name="prevAppointment" th:value="${appointment.getId()}" required>
+  <input type="submit" value="Conferma modifica" id="confirm">
+  <button class="back-button" onclick="location.back()">Indietro</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appuntamenti Paziente</title>
+    <style>
+      /* Stile per la tabella */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 80%;
+      }
+      th, td {
+        border: 2px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 120px;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<div style="text-align:right;">
+    <a href="/logout">Logout</a>
+</div>
+<h1>Home Patient</h1>
+<h2>Appuntamenti Paziente</h2>
+
+
+<br>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Id appuntamento</th>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Medico</th>
+        <th>Infermiere</th>
+        <th>Data appuntamento</th>
+        <th>Ora appuntamento</th>
+        <th>Visualizza prescrizione</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment: ${appointmentList}" onclick="selectRow(this)">
+        <td th:text="${appointment.id}"> <b>20 </b></td>
+        <td th:text="${appointment.patient.name}"> <b>Filippo </b></td>
+        <td th:text="${appointment.patient.surname}"> <b>Bino </b></td>
+        <td th:text="${appointment.doctor.surname}"> <b>Mario Rossi </b></td>
+        <td th:text="${appointment.nurse.surname}"> <b>Anna Maria </b></td>
+        <td th:text="${appointment.date}"> <b>15/01/2023 </b></td>
+        <td th:text="${appointment.hour}"> <b>8.30 </b></td>
+        <td> <a href="getPatientPrescription?id" th:href="@{getPatientPrescription(id=${appointment.getPatient().getPrescription().getId()})}">  Visualizza Prescrizione Medica </a> </td>
+    </tr>
+    </tbody>
+</table>
+<button onclick="window.history.back()">Indietro</button>
+
+</body>
+</html>
+
+
+<script>
+    var selectedRow = null;
+
+    function selectRow(row) {
+        if(selectedRow != null)
+            selectedRow.style.backgroundColor = "white";
+        row.style.backgroundColor = "lightblue";
+        selectedRow = row;
+    }
+</script>

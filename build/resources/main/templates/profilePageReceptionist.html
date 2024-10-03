@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Appuntamenti Della Clinica</title>
+  <style>
+      /* Stile per la tabella */
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 80%;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+
+    </style>
+</head>
+<body>
+<div style="text-align:right;">
+  <a href="/logout">Logout</a>
+</div>
+<h1>Home Receptionist</h1>
+<h2>Appuntamenti Paziente</h2>
+<table>
+  <tr>
+    <th>
+      <form action="/searchPatientFromReceptionist">
+        <label for="search-bar2">Cerca Paziente per cognome:</label>
+        <input type="text" id="search-bar2" name="research" placeholder=" Inserire cognome ">
+        <a href="searchPatient">
+          <button id="search-button2">Cerca</button>
+        </a>
+      </form>
+    </th>
+    <th>
+      <form action="/createAppointment">
+        <label>Crea Appuntamento:</label>
+        <a href="/createAppointment">
+          <input type="hidden" name="newAppointment" required>
+          <button type="submit" id="newAppointment">Crea</button>
+        </a>
+      </form>
+    </th>
+  </tr>
+</table>
+<br>
+<br>
+<hr>
+<table id="AppointmentTable">
+  <thead>
+  <tr>
+    <th>Id appuntamento</th>
+    <th>Id paziente</th>
+    <th>Paziente</th>
+    <th>Medico</th>
+    <th>Infermiere</th>
+    <th>Data appuntamento</th>
+    <th>Ora appuntamento</th>
+    <th>Cancella appuntamento</th>
+    <th>Modifica appuntamento</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="appointment: ${appointmentList}" onclick="selectRow(this)">
+    <td th:text="${appointment.id}"> <b>10 </b></td>
+    <td th:text="${appointment.patient.id}"> <b>10 </b></td>
+    <td th:text="${appointment.patient.surname}"> <b>20 </b></td>
+    <td th:text="${appointment.doctor.surname}"> <b>Mario Rossi </b></td>
+    <td th:text="${appointment.nurse.surname}"> <b>Anna Maria </b></td>
+    <td th:text="${appointment.date}"> <b>15/01/2023 </b></td>
+    <td th:text="${appointment.hour}"> <b>08.00 </b></td>
+    <td>
+      <form action="/deleteAppointment">
+        <input type="hidden" name="id" id="id" required>
+        <input type="hidden" name="appointmentId" id="appointmentId" th:value="${appointment.id}" required>
+        <button type="submit" id="deleteAppointment">Cancella</button>
+      </form>
+    </td>
+    <td>
+      <form action="/updateAppointment">
+          <input type="hidden" id="appointment" name="appointment" th:value="${appointment.getId()}">
+          <button type="submit" id="updateAppointment">Modifica</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<button onclick="window.history.back()">Indietro</button>
+</body>
+</html>
+
+<script>
+  var selectedRow = null;
+
+  function selectRow(row) {
+    if(selectedRow != null)
+      selectedRow.style.backgroundColor = "white";
+    row.style.backgroundColor = "lightblue";
+    selectedRow = row;
+  }
+</script>

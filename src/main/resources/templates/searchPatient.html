@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ricerca Paziente</title>
+  <style>
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        margin-top: 50px;
+      }
+      form {
+        margin: 0 auto;
+        width: 50%;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px #ccc;
+      }
+      label {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+      input[type="text"] {
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100%;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      button {
+        background-color: #f44336;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100%;
+      }
+      button:hover {
+        background-color: #da190b;
+      }
+    </style>
+</head>
+<body>
+<h1>Ricerca Paziente</h1>
+<form>
+  <label for="firstName">Nome:</label>
+  <input type="text" id="firstName" name="firstName"><br><br>
+  <label for="lastName">Cognome:</label>
+  <input type="text" id="lastName" name="lastName"><br><br>
+  <input type="submit" value="Cerca">
+  <button onclick="window.history.back()">Indietro</button>
+</form>
+<br>
+
+</body>
+</html>

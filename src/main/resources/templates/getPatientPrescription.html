@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Prescrizione del paziente</title>
+  <style>
+      /*CSS per formattare la pagina*/
+      #prescription {
+        width: 80%;
+        height: 200px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+
+      }
+      .button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 10px;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 80%;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+</head>
+<body>
+<h1>Prescrizione Medica Paziente</h1>
+<div>
+  <table>
+  <td id="prescription" th:text="${prescription.textReport}"><b>Descrizione indicazioni </b></td>
+  </table>
+    <table id="tableDrug">
+    <thead>
+    <tr>
+      <th>Nome Farmaco</th>
+      <th>Dose Minima</th>
+      <th>Dose Massima</th>
+      <th>Dose Assegnata</th>
+      <th>Frequenza</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+    <tr th:each="drug: ${prescription.drugList}">
+      <td th:text="${drug.name}"> <b>Paracetamol </b></td>
+      <td th:text="${drug.minimumDose}"> <b>5 mg </b></td>
+      <td th:text="${drug.maximumDose}"> <b>50 mg </b></td>
+      <td th:text="${drug.assignedDose}"> <b>20 mg </b></td>
+      <td th:text="${drug.frequency}"> <b>2 volte al giorno dopo i pasti </b></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<button id="back" onclick="window.history.back()" class="button">Indietro</button>
+</body>
+</html>

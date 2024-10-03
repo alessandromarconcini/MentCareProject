@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Users List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        text-align: center;
+        margin-top: 50px;
+      }
+      table {
+        margin: 0 auto;
+        border-collapse: collapse;
+        width: 80%;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+</head>
+<body>
+<div style="text-align:right;">
+    <a href="/logout">Logout</a>
+</div>
+<h1>Home Manager</h1>
+<h2>User List</h2>
+
+<table>
+    <tr>
+        <th>
+            <form action="/searchUser">
+                <div id="search-container">
+                    <label for="search-bar">Cerca Utente:</label>
+                    <input type="text" id="search-bar" name="research" placeholder=" Inserire cognome ">
+                    <button id="search-button">Cerca</button>
+                </div>
+                <div id="search-results"></div>
+            </form>
+        </th>
+    </tr>
+</table>
+<table>
+        <th>
+            <form action="/createDoctor">
+                <label for="NewDoctor">Inserisci Nuovo Medico:</label>
+                <input type="hidden" name="id" id="id" required>
+                <button type="submit" name="NewDoctor" id="NewDoctor">Nuovo Medico</button>
+            </form>
+        </th>
+        <th>
+            <form action="/createNurse">
+                <label for="createNurse">Inserisci Nuovo Infermiere:</label>
+                <button type="submit" id="createNurse">Nuovo Infermiere</button>
+            </form>
+        </th>
+        <th>
+            <form action="/createPatient">
+                <label for="createPatient">Inserisci Nuovo Paziente:</label>
+                <button type="submit" id="createPatient">Nuovo Paziente</button>
+            </form>
+        </th>
+        <th>
+            <form action="/createReceptionist">
+                <label for="createReceptionist">Inserisci Nuovo Receptionist:</label>
+                <button type="submit" id="createReceptionist">Nuovo Receptionist</button>
+            </form>
+        </th>
+</table>
+<br>
+<br>
+<hr>
+<table id="UserTable">
+    <tr>
+        <th>Id Utente</th>
+        <th>Nome Utente</th>
+        <th>Cognome Utente</th>
+        <th>Codice Fiscale Utente</th>
+        <th>Tipologia Utente</th>
+    </tr>
+    <tr th:each= "user: ${userList}" onclick="selectRow(this)">
+        <td th:text="${user.id}"> <b>1 </b></td>
+        <td th:text="${user.name}"> <b>Gino </b></td>
+        <td th:text="${user.surname}"> <b>Nonni </b></td>
+        <td th:text="${user.fiscalCode}"> <b>AMMLLJSKDKQNDJK99 </b></td>
+        <td th:text="${user.getType()}"> <b>Manager </b></td>
+    </tr>
+</table>
+<br>
+<button onclick="window.history.back()">Indietro</button>
+</body>
+</html>
+
+<script>
+    var selectedRow = null;
+
+    function selectRow(row) {
+        if(selectedRow != null)
+            selectedRow.style.backgroundColor = "white";
+        row.style.backgroundColor = "lightblue";
+        selectedRow = row;
+    }
+</script>
